@@ -589,10 +589,6 @@ function checkScrollPosition() {
   }
 }
 
-function scrollToBottom() {
-  messages.scrollTop = messages.scrollHeight;
-}
-
 socket.on("other-chat", (message) => {
   if (shouldHandleMessage(message)) {
     displayMessage(message);
