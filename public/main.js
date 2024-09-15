@@ -1,7 +1,7 @@
 // main.js
-// document.addEventListener('contextmenu', function (event) {
-//   event.preventDefault();
-// });
+document.addEventListener('contextmenu', function (event) {
+  event.preventDefault();
+});
 
 const socket = io();
 
@@ -64,8 +64,18 @@ document.addEventListener("keydown", function (event) {
     toggleSearch();
   }
 });
-
-
+inputFormDuplicated.addEventListener('input', (event) => {
+  if (inputFormDuplicated.value === '') {
+    // Xóa nội dung của resulFormDuplicated khi trường input trống
+    resulFormDuplicated.innerHTML = '';
+  }
+});
+function highlightSearchTerm(message, term) {
+  // Tạo một RegExp với từ khóa tìm kiếm
+  const regex = new RegExp(`(${term})`, 'gi');
+  // Thay thế từ khóa tìm kiếm bằng phiên bản có màu đỏ
+  return message.replace(regex, '<span class="highlight">$1</span>');
+}
 inputFormDuplicated.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
     event.preventDefault(); // Ngăn form submit mặc định
@@ -84,7 +94,7 @@ inputFormDuplicated.addEventListener('keydown', (event) => {
               let img = '';
               if (item.reply_to_id) {
                 img = `<span class="status-search-reply text-success">Kết quả</span>`;
-                replySearchContent = `<span class="status-search-reply text-danger">Gửi</span><div>
+                replySearchContent = `<span class="status-search-reply text-danger">Gửi</span><div >
             <div style="font-size:0.8rem">${highlightSearchTerm(item.reply_to_content, searchTerm)}</div>
             <div class="text-gray-500">${formatDate(item.reply_to_date_send)}</div>
         </div>`;
@@ -579,15 +589,19 @@ function checkScrollPosition() {
   }
 }
 
+function scrollToBottom() {
+  messages.scrollTop = messages.scrollHeight;
+}
+
 socket.on("other-chat", (message) => {
   if (shouldHandleMessage(message)) {
     displayMessage(message);
     if (sender_name !== message.sender_name) {
       checkScrollPosition();
-      updateUnreadCount();
     } else {
       scrollToBottom();
     }
+      updateUnreadCount();
   }
 });
 socket.on("chat-updated", (data) => {
