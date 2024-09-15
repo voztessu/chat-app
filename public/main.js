@@ -103,7 +103,7 @@ inputFormDuplicated.addEventListener('keydown', (event) => {
               }
               const itemFormDuplicated = document.createElement('div');
               itemFormDuplicated.classList.add('itemFormDuplicated', 'p-2', 'border-bottom', 'border-left', 'border-right');
-              itemFormDuplicated.innerHTML = `<div class="d-flex flex-column">${replySearchContent}</div><div class="d-flex justify-content-start flex-column">${img}<span class="msgFormDuplicated" style="white-space: pre-wrap;">${highlightedMessage}<span><div class="text-gray-500">${sender_name == item.sender_name ? `${item.sender_name}, ` : ''}${formatDate(item.date_send)}</div></div>`;
+              itemFormDuplicated.innerHTML = `<div class="d-flex flex-column">${replySearchContent}</div><div class="d-flex justify-content-start flex-column pt-1">${img}<span class="msgFormDuplicated" style="white-space: pre-wrap;">${highlightedMessage}<span><div class="text-gray-500">${sender_name == item.sender_name || sender_role=='kh' ? `${item.sender_name}, ` : ''}${formatDate(item.date_send)}</div></div>`;
               resulFormDuplicated.appendChild(itemFormDuplicated);
             });
           } else {
