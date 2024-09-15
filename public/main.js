@@ -64,12 +64,7 @@ document.addEventListener("keydown", function (event) {
     toggleSearch();
   }
 });
-inputFormDuplicated.addEventListener('input', (event) => {
-  if (inputFormDuplicated.value === '') {
-    // Xóa nội dung của resulFormDuplicated khi trường input trống
-    resulFormDuplicated.innerHTML = '';
-  }
-});
+
 
 inputFormDuplicated.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
