@@ -94,7 +94,7 @@ inputFormDuplicated.addEventListener('keydown', (event) => {
               let img = '';
               if (item.reply_to_id) {
                 img = `<span class="status-search-reply text-success">Kết quả</span>`;
-                replySearchContent = `<span class="status-search-reply text-danger">Gửi</span><div >
+                replySearchContent = `<span class="status-search-reply text-danger">Gửi</span>
             <div style="font-size:0.8rem">${highlightSearchTerm(item.reply_to_content, searchTerm)}</div>
             <div class="text-gray-500">${formatDate(item.reply_to_date_send)}</div>
         </div>`;
