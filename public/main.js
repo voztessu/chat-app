@@ -70,12 +70,7 @@ inputFormDuplicated.addEventListener('input', (event) => {
     resulFormDuplicated.innerHTML = '';
   }
 });
-function highlightSearchTerm(message, term) {
-  // Tạo một RegExp với từ khóa tìm kiếm
-  const regex = new RegExp(`(${term})`, 'gi');
-  // Thay thế từ khóa tìm kiếm bằng phiên bản có màu đỏ
-  return message.replace(regex, '<span class="highlight">$1</span>');
-}
+
 inputFormDuplicated.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
     event.preventDefault(); // Ngăn form submit mặc định
