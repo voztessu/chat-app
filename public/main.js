@@ -91,21 +91,19 @@ inputFormDuplicated.addEventListener('keydown', (event) => {
             data.search_duplicated.forEach((item) => {
               const highlightedMessage = highlightSearchTerm(item.message, searchTerm);
               let replySearchContent = '';
-
+              let img = '';
               if (item.reply_to_id) {
-                replySearchContent = `
-        <div class="rounded-left" style="border-left: 3px solid #686868;box-shadow:rgba(0, 0, 0, 0.2) 1px 1.5px 1px; background: #f1f1f1; padding-left: 5px;margin-bottom: 5px;">
-            <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#212121">
-                <path d="M9.277 16.221a.75.75 0 0 1-1.061 1.06l-4.997-5.003a.75.75 0 0 1 0-1.06L8.217 6.22a.75.75 0 0 1 1.061 1.06L5.557 11h7.842c1.595 0 2.81.242 3.889.764l.246.126a6.203 6.203 0 0 1 2.576 2.576c.61 1.14.89 2.418.89 4.135a.75.75 0 0 1-1.5 0c0-1.484-.228-2.52-.713-3.428a4.702 4.702 0 0 0-1.96-1.96c-.838-.448-1.786-.676-3.094-.709L13.4 12.5H5.562l3.715 3.721Z"></path>
-            </svg>
-            <div style="font-size:0.8rem">${highlightSearchTerm(item.reply_to_content,searchTerm)}</div>
-            <div style="font-size:12px;">${formatDate(item.reply_to_date_send)}</div>
+                img = `<span class="status-search-reply text-success">Kết quả</span>`;
+                replySearchContent = `<span class="status-search-reply text-danger">Gửi</span><div >
+            <div style="font-size:0.8rem">${highlightSearchTerm(item.reply_to_content, searchTerm)}</div>
+            <div class="text-gray-500">${formatDate(item.reply_to_date_send)}</div>
         </div>`;
+              } else {
+                img = `<span class="status-search-reply text-danger">Gửi</span>`;
               }
               const itemFormDuplicated = document.createElement('div');
-              itemFormDuplicated.classList.add('itemFormDuplicated','border-bottom', 'p-2');
-              itemFormDuplicated.innerHTML = `<div class="d-flex align-items-start">
-</div>${replySearchContent}<div class="d-flex justify-content-start flex-column"><span class="msgFormDuplicated" style="white-space: pre-wrap;">${highlightedMessage}<span><div class="text-gray-500">${formatDate(item.date_send)}</div></div>`;
+              itemFormDuplicated.classList.add('itemFormDuplicated', 'p-2', 'border-bottom', 'border-left', 'border-right');
+              itemFormDuplicated.innerHTML = `<div class="d-flex flex-column">${replySearchContent}</div><div class="d-flex justify-content-start flex-column">${img}<span class="msgFormDuplicated" style="white-space: pre-wrap;">${highlightedMessage}<span><div class="text-gray-500">${sender_name == item.sender_name ? `${item.sender_name}, ` : ''}${formatDate(item.date_send)}</div></div>`;
               resulFormDuplicated.appendChild(itemFormDuplicated);
             });
           } else {

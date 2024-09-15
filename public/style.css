@@ -371,17 +371,25 @@ textarea::-webkit-scrollbar {
     color: #686868;
 }
 .resulFormDuplicated{
-    height:50vh;
+    /* height:50vh; */
+    flex:1;
 }
 .itemFormDuplicated:hover{
+    color: #16181b;
     background-color: #f8f9fa;
     cursor: pointer;
+    /* border-left:5px solid #40a7e3!important; */
 }
 .itemFormDuplicated{
-    transition: background-color 0.2s ease;
+    /* transition: background-color 0.2s ease; */
+    transition: border 200ms;
 }
 .highlight {
-    background-color: yellow;
-    /* color: #fff; */
+    background-color: #1d1d1d;
+    color: #fff;
     border-radius: 3px;
+}
+.status-search-reply{
+    font-size:0.8rem;
+    font-weight:bold;
 }
