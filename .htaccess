@@ -1,0 +1,14 @@
+RewriteEngine On
+
+# Proxy cho WebSocket (wss://)
+RewriteCond %{REQUEST_URI} ^/socket.io/ [NC]
+RewriteCond %{QUERY_STRING} transport=websocket [NC]
+RewriteRule ^/socket.io/(.*) wss://nameck.tech:3000/socket.io/$1 [P,L]
+
+# Proxy cho các yêu cầu HTTP khác đến Socket.IO
+RewriteCond %{REQUEST_URI} ^/socket.io/ [NC]
+RewriteRule ^/socket.io/(.*) https://nameck.tech:3000/socket.io/$1 [P,L]
+
+# Cấu hình Proxy cho toàn bộ các yêu cầu khác
+ProxyPass / http://nameck.tech:3000/
+ProxyPassReverse / http://nameck.tech:3000/
